@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap');
+
+:root {
+  --vl-devanagari-sans: "Noto Sans Devanagari", "Noto Sans", sans-serif;
+  --vl-devanagari-serif: "Noto Serif Devanagari", "Noto Serif", serif;
+}
+
+.md-typeset,
+.md-nav,
+.md-header {
+  font-family: var(--vl-devanagari-sans);
+}
+
+/* Inline `code` at the same size as the surrounding text. */
+.md-typeset :not(pre) > code {
+  font-size: inherit;
+}
+
+/* --- Quote blocks: /// in, /// ii, /// ih ---------------------------------
+   These are admonitions under the hood (pymdownx.blocks.admonition), so
+   strip everything admonition-like: no box, border, shadow, icon or title.
+   What's left is an indented block in the serif face. */
+.md-typeset .admonition:is(.in, .ii, .ih) {
+  border: none;
+  box-shadow: none;
+  background: none;
+  padding: 0;
+  margin: 0.8em 0 0.8em 2em;
+  font-size: inherit;
+  font-family: var(--vl-devanagari-serif);
+}
+.md-typeset .admonition:is(.in, .ii, .ih) > .admonition-title {
+  display: none;
+}
+.md-typeset .admonition:is(.in, .ii, .ih) > :first-child:not(.admonition-title),
+.md-typeset .admonition:is(.in, .ii, .ih) > .admonition-title + * {
+  margin-top: 0;
+}
+.md-typeset .admonition:is(.in, .ii, .ih) > :last-child {
+  margin-bottom: 0;
+}
+
+/* Inside a quote block, a line break in the source is a line break on the
+   page, so a verse keeps its pāda lines. */
+.md-typeset .admonition:is(.in, .ii, .ih) p {
+  white-space: pre-line;
+}
+
+/* in: indent only (above). */
+
+/* ii: indent + italic. */
+.md-typeset .admonition.ii {
+  font-style: italic;
+}
+
+/* ih: indent + highlight — a soft tinted band with an accent rule. */
+.md-typeset .admonition.ih {
+  background: color-mix(in srgb, var(--md-accent-fg-color) 12%, transparent);
+  border-left: 0.2rem solid var(--md-accent-fg-color);
+  padding: 0.5em 0.8em;
+}
